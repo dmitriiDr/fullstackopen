@@ -25,7 +25,7 @@ const Statistics = (props) => {
       <div>good {props.good}</div>
       <div>neutral {props.neutral}</div>
       <div>bad {props.bad}</div>
-      <div>total {props.total}</div>
+      <div>all {props.total}</div>
       <div>average <Average score={props.score} total={props.total} /></div>
       <div>positive <Positive good={props.good} total={props.total} /> %</div>
     </div>
