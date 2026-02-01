@@ -5,20 +5,22 @@ const Button = ({onClick, text}) => (
   )
 
 const Average = ({score, total}) => {
-  if (total === 0)
-    return 0
-  else
     return score / total
 }
 
 const Positive = ({good, total}) => {
-  if (total === 0)
-    return 0
-  else
     return (good / total) * 100
 }
 
 const Statistics = (props) => {
+  if (props.total === 0) {
+    return (
+      <div>
+        <h1>statistics</h1>
+        <div>No feedback given</div>
+      </div>
+    )
+  }
   return (
     <div>
       <h1>statistics</h1>
