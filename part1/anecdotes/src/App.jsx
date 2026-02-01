@@ -22,12 +22,16 @@ const App = () => {
   const [votes, setVotes] = useState(Array(anecdotes.length).fill(0))
   const copy = [...votes]
 
+  const maxVotes = Math.max(...votes)
+  const indexOfMax = votes.indexOf(maxVotes)
+
   return (
     <div>
       <div>
+        <h1>Anecdote of the day</h1>
+        <br />
         {anecdotes[selected]}
       </div>
-      <br />
       <div>
         has {copy[selected]} votes
       </div>
@@ -42,6 +46,12 @@ const App = () => {
         }
         setSelected(next)
       }} text="next anecdote" />
+      <div>
+        <br />
+        <h1>Anecdote with most votes</h1>
+        <br />
+        {anecdotes[indexOfMax]}
+      </div>
     </div>
   )
 }
