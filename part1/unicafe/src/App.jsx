@@ -4,16 +4,15 @@ const Button = ({onClick, text}) => (
     <button onClick={onClick}>{text}</button>
   )
 
-const Average = ({score, total}) => {
-    return score / total
-}
-
-const Positive = ({good, total}) => {
-    return (good / total) * 100
+const StatisticLine = ({text, value}) => {
+  return <div>{text} {value}</div>
 }
 
 const Statistics = (props) => {
-  if (props.total === 0) {
+  const total = props.good + props.neutral + props.bad
+  const score = props.good - props.bad
+
+  if (total === 0) {
     return (
       <div>
         <h1>statistics</h1>
@@ -24,12 +23,12 @@ const Statistics = (props) => {
   return (
     <div>
       <h1>statistics</h1>
-      <div>good {props.good}</div>
-      <div>neutral {props.neutral}</div>
-      <div>bad {props.bad}</div>
-      <div>all {props.total}</div>
-      <div>average <Average score={props.score} total={props.total} /></div>
-      <div>positive <Positive good={props.good} total={props.total} /> %</div>
+      <StatisticLine text="good" value={props.good} />
+      <StatisticLine text="neutral" value={props.neutral} />
+      <StatisticLine text="bad" value={props.bad} />
+      <StatisticLine text="all" value={total} />
+      <StatisticLine text="average" value={score / total} />
+      <StatisticLine text="positive" value={(props.good / total) * 100} />
     </div>
   )
 }
@@ -39,8 +38,6 @@ const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
-  const [total, setTotal] = useState(0)
-  const [score, setScore] = useState(0)
 
   return (
     <div>
@@ -48,21 +45,14 @@ const App = () => {
 
       <Button onClick={() => {
         setGood(good + 1)
-        setTotal(total + 1)
-        setScore(score + 1)
       }} text="good" />
       <Button onClick={() => {
         setNeutral(neutral + 1)
-        setTotal(total + 1)
-        setScore(score + 0)
       }} text="neutral" />
       <Button onClick={() => {
         setBad(bad + 1)
-        setTotal(total + 1)
-        setScore(score - 1)
       }} text="bad" />
-
-      <Statistics good={good} neutral={neutral} bad={bad} total={total} score={score} />
+      <Statistics good={good} neutral={neutral} bad={bad} />
     </div>
   )
 }
