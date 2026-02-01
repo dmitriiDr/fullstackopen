@@ -19,12 +19,22 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState(Array(anecdotes.length).fill(0))
+  const copy = [...votes]
 
   return (
     <div>
       <div>
         {anecdotes[selected]}
       </div>
+      <br />
+      <div>
+        has {copy[selected]} votes
+      </div>
+      <Button onClick={() => {
+        copy[selected] += 1
+        setVotes(copy)
+      }} text='vote'/>
       <Button onClick={() => {
         let next = selected
         while (next === selected) {
