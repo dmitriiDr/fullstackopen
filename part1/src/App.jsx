@@ -1,34 +1,52 @@
-const Hello = (props) => {
-  console.log(props)
+import { useState } from 'react'
+
+const History = (props) => {
+  if (props.allClicks.length === 0) {
+    return (
+      <div>
+        the app is used by pressing the buttons
+      </div>
+    )
+  }
   return (
     <div>
-      <p>
-        Hello {props.name}, you are {props.age} years old
-      </p>
+      button press history: {props.allClicks.join(' ')}
     </div>
   )
-  
 }
 
-const Footer = () => {
-  return (
-    <div>
-      Greetings
-    </div>
-  )
-}
+const Button = ({ onClick, text }) => 
+  <button onClick={onClick}>{text}</button>
 
 
 const App = () => {
-  const friends = [
-    { name: 'Peter', age: 4 },
-    { name: 'Maya', age: 10 },
-  ]
+  const [clicks, setClicks] = useState(
+    {left: 0, right: 0}
+  )
+
+  const [allClicks, setAll] = useState([])
+
+  const [total, setTotal] = useState(0)
+
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    setClicks({...clicks,left: clicks.left + 1})
+    setTotal(total + 1)
+  }
+
+  const handleRightClick = () => {
+    setAll(allClicks.concat('R'))
+    setClicks({...clicks,right: clicks.right + 1})
+    setTotal(total + 1)
+  }
 
   return (
     <div>
-      <p>{friends[0].name}, {friends[0].age}</p>
-      <p>{friends[1].name}, {friends[1].age}</p>
+      {clicks.left}
+      <Button onClick={handleLeftClick} text="left" />
+      <Button onClick={handleRightClick} text="right" />
+      {clicks.right}
+      <History allClicks={allClicks} />
     </div>
   )
 }
