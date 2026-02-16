@@ -1,12 +1,15 @@
 import Header from "./Header"
 import Content from "./Content"
+import SumExercises from "./SumExercises"
 
 const Course = ({ course }) => {
     return (
         <div>
             <Header course={course.name} />
             <Content parts={course.parts} />
-            {/* <p>Total number of exercises {course.parts.reduce((sum, part) => sum + part.exercises, 0)}</p> */}
+            <h3>
+                <SumExercises parts={course.parts} />
+            </h3>
         </div>
     )
 }
