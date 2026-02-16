@@ -1,24 +1,8 @@
-// const Header = (props) => <h1>{props.course}</h1>
-
-// const Content = (props) => (
-//   <div>
-//     <Part part={props.parts[0]} />
-//     <Part part={props.parts[1]} />
-//     <Part part={props.parts[2]} />
-//   </div>
-// )
-
-// const Part = (props) => (
-//   <p>
-//     {props.part.name} {props.part.exercises}
-//   </p>
-// )
-
-// const Total = (props) => <p>Number of exercises {props.total}</p>
 import Course from './components/Course'
 
 const App = () => {
-  const course = {
+  const courses = [
+  {
     id: 1,
     name: 'Half Stack application development',
     parts: [
@@ -41,16 +25,34 @@ const App = () => {
         name: 'Redux',
         exercises: 11,
         id: 4
+      }
+    ]
+  },
+  {
+    name: 'Node.js',
+    id: 2,
+    parts: [
+      {
+        name: 'Routing',
+        exercises: 3,
+        id: 1
       },
-      // {
-      //   name: 'Test2',
-      //   exercises: 3,
-      //   id: 5
-      // }
+      {
+        name: 'Middlewares',
+        exercises: 7,
+        id: 2
+      }
     ]
   }
+]
 
-  return <Course course={course} />
+  return (
+    <div>
+      {courses.map(course => (
+        <Course key={course.id} course={course} />
+      ))}
+    </div>
+  )
 }
 
 export default App
